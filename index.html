@@ -1,1 +1,53 @@
-<h1>Hello, world!</h1>
+<html>
+<body>
+
+<script type="text/javascript" src="qrcode.js"></script>
+<script type="text/javascript">
+  var MONTHS = new Map();
+  MONTHS.set(0, "Jan");
+  MONTHS.set(1, "Feb");
+  MONTHS.set(2, "Mar");
+  MONTHS.set(3, "Apr");
+  MONTHS.set(4, "May");
+  MONTHS.set(5, "Jun");
+  MONTHS.set(6, "Jul");
+  MONTHS.set(7, "Aug");
+  MONTHS.set(8, "Sep");
+  MONTHS.set(9, "Oct");
+  MONTHS.set(10, "Nov");
+  MONTHS.set(11, "Dec");
+
+  var date = new Date();
+  var output =
+      "292-" +
+      MONTHS.get(date.getMonth()) +
+      " " +
+      date.getDate() +
+      ", " +
+      date.getFullYear() +
+      "-Boulder Day Nursery";
+
+  function initialTime() {
+    document.getElementById('output').value = output;
+    updateTime();
+  }
+  function updateTime() {
+    var updatedTime = document.getElementById("output").value;
+    var qrCodeP = document.getElementById("qrcode");
+    qrCodeP.innerHTML = "";
+    new QRCode(qrCodeP, btoa(updatedTime));
+  }
+  window.onload = initialTime;
+</script>
+
+<input
+    id="output"
+    type="text"
+    style="font-size:40px;"
+    size="36"
+    onkeydown="updateTime()">
+</input>
+<p id="qrcode"></p>
+
+</body>
+</html>
